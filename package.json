@@ -1,0 +1,18 @@
+{
+  "name": "ecommerce-orders-service",
+  "version": "1.0.0",
+  "description": "Orders service for bug hunting workshop - Data Leak module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "jest --verbose"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
+  }
+}
