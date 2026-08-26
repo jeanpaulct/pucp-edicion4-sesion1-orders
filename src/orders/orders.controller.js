@@ -47,7 +47,21 @@ const getOrderById = (req, res) => {
         });
     }
 
-    return res.status(200).json(order);
+    const orderDTO = {
+        id: order.id,
+        totalAmount: order.totalAmount,
+        status: order.status,
+        createdAt: order.createdAt,
+        customer: {
+            userId: order.customer.userId,
+            name: order.customer.name,
+            email: order.customer.email,
+            // Enmascaramiento de datos sensibles si es estrictamente necesario enviarlos
+            creditCardLast4: order.customer.creditCardDigits.slice(-4) 
+        }
+    };
+
+    return res.status(200).json(orderDTO);
 };
 
 module.exports = {
