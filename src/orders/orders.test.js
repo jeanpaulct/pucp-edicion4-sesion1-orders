@@ -25,5 +25,18 @@ describe('Orders Service API - /api/orders', () => {
             expect(response.body.status).toBe('error');
         });
 
+        it('should not expose sensitive customer data in the response payload', async () => {
+            const targetOrderId = 'ORD-5001';
+            const response = await request(app).get(`/api/orders/${targetOrderId}`);
+
+            expect(response.status).toBe(200);
+            expect(response.body.customer).toBeDefined();
+            
+            // Estas aserciones fallarán porque la API actual devuelve el objeto completo
+            expect(response.body.customer.passwordHash).toBeUndefined();
+            expect(response.body.customer.oauth_token).toBeUndefined();
+            expect(response.body.customer.creditCardDigits).toBeUndefined();
+        });
+
     });
 });
